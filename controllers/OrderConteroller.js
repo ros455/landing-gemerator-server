@@ -42,3 +42,15 @@ export const getOne = async (req, res) => {
         console.error(error);
       }
 }
+
+export const remove = async (req, res) => {
+    try {
+        const orderId = req.params.id
+
+        const doc = await OrderModel.findByIdAndDelete({ _id: orderId })
+
+        return res.json({ success: true })
+    } catch (e) {
+        console.log(e)
+    }
+}
