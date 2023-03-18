@@ -3,7 +3,7 @@ import * as UserCommentController from '../controllers/UserCommentController.js'
 
 const router = new Router();
 
-router.post('/upload', UserCommentController.upload.single('imageUrl'), UserCommentController.create);
+router.post('/create-user-comment', UserCommentController.upload.single('imageUrl'), UserCommentController.create);
 
 router.get('/get-all-comments',UserCommentController.getAll);
 
