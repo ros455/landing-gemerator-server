@@ -30,3 +30,15 @@ export const getAll = async (req, res) => {
         console.log(e);
     }
 }
+
+export const getOne = async (req, res) => {
+    try {
+        const orderId = req.params.id;
+
+        const order = await OrderModel.findOne({ _id: orderId });
+    
+        res.json(order);
+      } catch (error) {
+        console.error(error);
+      }
+}
