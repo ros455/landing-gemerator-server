@@ -71,6 +71,8 @@ export const create = async (req, res) => {
 export const update = async (req, res) => {
     try {
         const { imageUrl, description, name, rating, date } = req.body;
+        console.log('description',description);
+        console.log('name',name);
         const commentId = req.params.id;
 
         const product = await AdminCommentModel.updateOne(
