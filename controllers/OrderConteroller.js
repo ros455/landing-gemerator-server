@@ -2,16 +2,13 @@ import OrderModel from '../models/Order.js';
 
 export const create = async (req, res) => {
     try {
-        const {name, phone, adress, title, color, price, availability, comment} = req.body;
-
+        const {name, phone, adress, selectedorder,  comment} = req.body.data;
+        
         const order = await OrderModel.create({
             name, 
             phone, 
             adress,
-            title,
-            color,
-            price,
-            availability,
+            selectedorder,
             comment
         });
 
