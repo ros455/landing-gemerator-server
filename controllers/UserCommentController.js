@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
 export const upload = multer({ storage });
 
 export const create = async (req, res) => {
-    const {imageUrl, name, description, rating} = req.body;
+    const {imageUrl, name, description, rating, date} = req.body;
     console.log('imageUrl',imageUrl);
     try {
         if(imageUrl != "null") {
@@ -37,7 +37,8 @@ export const create = async (req, res) => {
             imageUrl: result.secure_url,
             name,
             description,
-            rating
+            rating,
+            date
         });
         await comment.save();
 
@@ -51,7 +52,8 @@ export const create = async (req, res) => {
             imageUrl,
             name,
             description,
-            rating
+            rating,
+            date
         });
         await comment.save();
 
