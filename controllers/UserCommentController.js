@@ -25,20 +25,19 @@ const storage = multer.diskStorage({
 export const upload = multer({ storage });
 
 export const create = async (req, res) => {
+    const {imageUrl, name, description, rating} = req.body;
+    console.log('imageUrl',imageUrl);
     try {
-        if (!req.file) {
-            throw new Error('Image file not provided');
-        }
-
-        // завантажуємо файл до Cloudinary
+        if(imageUrl != "null") {
+                    // завантажуємо файл до Cloudinary
         const result = await cloudinary.v2.uploader.upload(req.file.path);
 
         // створюємо новий об'єкт UserCommentModel та зберігаємо його до бази даних
         const comment = new UserCommentModel({
             imageUrl: result.secure_url,
-            name: req.body.name,
-            description: req.body.description,
-            rating: req.body.rating
+            name,
+            description,
+            rating
         });
         await comment.save();
 
@@ -46,6 +45,19 @@ export const create = async (req, res) => {
         res.json({
             img: result.secure_url,
         });
+        } else {
+        // створюємо новий об'єкт UserCommentModel та зберігаємо його до бази даних
+        const comment = new UserCommentModel({
+            imageUrl,
+            name,
+            description,
+            rating
+        });
+        await comment.save();
+
+        // відправляємо відповідь з URL зображення
+        res.json(comment);
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({
